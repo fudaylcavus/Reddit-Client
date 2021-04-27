@@ -6,7 +6,7 @@ export const urlFix = (url) => {
     return fixed;
 }
 
-export const upVoteStyle = (ups) => {
+export const shortenNumber = (ups) => {
     if (ups > 1000000)
         return (ups / 1000000).toFixed(1) +'m';
     if (ups > 1000)

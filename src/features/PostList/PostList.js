@@ -9,24 +9,24 @@ const PostList = () => {
     let posts = useSelector(selectPosts);
     let activeReddit = useSelector(selectActiveReddit);
 
-
     useEffect(() => {
-
-            Reddit.getSubredditPosts('r/popular').then(json => {
-                json.forEach(item => {
-                    dispatch(addPost({
-                        name: item.display_name,
-                        title: item.title,
-                        url: item?.url,
-                        id: item.id,
-                        ups: item.ups,
-                        author: item.author,
-                        img: item.preview?.images[0]?.source?.url,
-                        created: item.created,
-                        permalink: item.permalink
-                    }))
-                })
+        Reddit.getSubredditPosts(activeReddit).then(json => {
+            json.forEach(item => {
+                dispatch(addPost({
+                    name: item.display_name,
+                    title: item.title,
+                    url: item?.url,
+                    id: item.id,
+                    ups: item.ups,
+                    author: item.author,
+                    img: item.preview?.images[0]?.source?.url,
+                    created: item.created,
+                    permalink: item.permalink,
+                    commentCount: item.num_comments,
+                    comments: []
+                }))
             })
+        })
         
     }, [dispatch, activeReddit])
 
@@ -34,12 +34,12 @@ const PostList = () => {
         <div className="post-area">
             {
             posts.length > 5 ? 
-                posts.map( (post, index) => <Post post={post} isLoading={true}/>) 
+                posts.map((post) => {
+                    return <Post post={post} isLoading={true}/>
+                }) 
                 : <h1 className="post">HELLO BRO</h1>
-
             }
         </div>
-        
     )
 }
 export default PostList;

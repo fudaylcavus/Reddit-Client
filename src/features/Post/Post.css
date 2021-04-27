@@ -10,6 +10,7 @@
     height: fit-content;
     max-height: 90vh;
     background-color: white;
+    overflow: hidden;
 }
 .vote-section {
     display: flex;
@@ -47,7 +48,7 @@
     align-items: center;
     text-align: center;
     width: auto;
-    max-height: 90%;
+    max-height: 80%;
 }
 .title {
     font-weight: bold;
@@ -58,8 +59,8 @@
     height: auto;
     border-radius: 20px;
     width: 70%;
-    max-height: 70%;
-    max-width: 70%;
+    max-height: 80%;
+    max-width: 80%;
     object-fit: contain;
 }
 
@@ -71,10 +72,15 @@
 }
 
 .content-footer button {
+    cursor: pointer;
     outline: none;
     border: none;
     background-color: white;
     font-size: 20px;
+    padding: 10px;
+}
+.content-footer button:hover {
+    background-color: whitesmoke;
 }
 
 .content-footer i {
