@@ -1,3 +1,5 @@
+import { format } from "timeago.js";
+
 //Images being forbidden without doing this
 export const urlFix = (url) => {
     let fixed = url.replaceAll("amp;", "")
@@ -15,5 +17,5 @@ export const upVoteStyle = (ups) => {
 export const milisecondsToDate = ms => {
     let dt = new Date()
     dt.setMilliseconds(ms);
-    return dt.toString().substring(3, 15)
+    return format(dt, 'en_US')
 }
