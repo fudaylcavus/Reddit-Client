@@ -9,7 +9,7 @@ function App() {
     <main className="root-body">
       <nav>
         <a href="https://reddit.com">
-          <img src="https://www.vectorico.com/download/social_media/Reddit-Icon.png" alt="reddit" width="50px" height="50px" />
+          <img src="https://marka-logo.com/wp-content/uploads/2020/11/Reddit-Logo.png" alt="reddit"/>
         </a>
         <SearchBar/>
       </nav>

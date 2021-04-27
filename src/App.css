@@ -27,5 +27,6 @@ nav {
 nav img {
     position: relative;
     display: inline-block;
-    left: 5%;
+    width: auto;
+    height: 60px; 
 }
