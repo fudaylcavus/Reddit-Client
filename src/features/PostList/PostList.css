@@ -1,3 +1,13 @@
 .post-area {
     grid-area: middle;
 }
+
+@media screen and (max-width: 1468px) {
+    .post-area {
+        grid-column-start: left;
+        grid-column-end: right;
+    }
+    .post {
+        margin: 20px 15px;
+    }
+}

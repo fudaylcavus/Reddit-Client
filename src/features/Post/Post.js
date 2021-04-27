@@ -15,10 +15,10 @@ const Post = ({post}) => {
             </div>
             <div className="content-section">
                 <div className="info">
-                    {`Posted by ${post.author} at ${milisecondsToDate(post.created)}`}
-                    <h2 className="title">{post.title}</h2>
+                    <p>{`Posted by ${post.author} ${milisecondsToDate(post.created)}`}</p>
                 </div>
                 <div className="content">
+                    <h2 className="title">{post.title}</h2>
                     {post.img ? 
                         <img src={urlFix(post.img)} onError={(e) => e.target.display = 'none'} alt="post"/> 
                         : ""}

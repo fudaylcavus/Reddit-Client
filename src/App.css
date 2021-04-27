@@ -20,6 +20,7 @@ nav {
     height: 70px;
     text-align: center;
     align-items: center;
+    z-index: 10;
     
 }
 

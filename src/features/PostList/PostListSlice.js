@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    posts: []
+    posts: [],
+    activeReddit: ""
 }
 
 
@@ -20,7 +21,7 @@ const options = {
 
 const postlist = createSlice(options)
 
-
+export const selectActiveReddit = state => state.postList.activeReddit
 export const selectPosts = state => state.postList.posts
 export default postlist.reducer;
 export const { addPost, addPosts } = postlist.actions;
