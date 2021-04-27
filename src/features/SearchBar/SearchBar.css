@@ -1,0 +1,40 @@
+.searchItems {
+    grid-area: 1 / 2 / 2 / 4;
+    display: flex;
+    justify-content: center;
+}
+
+.searchBox {
+    outline:none;
+    border: none;
+    height: 35px;
+    width: 70%;
+    border-radius: 17.5px;
+    margin-right: 5px;
+    outline: none;
+    padding-left: 20px;
+    background-color: #D1B5B5;
+    color:white;
+}
+
+.searchBox::placeholder {
+    color: white;
+}
+
+.searchButton {
+    border: none;
+    font-size: 20px;
+    outline: none;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    background-color: white;
+    color:#aa9696;
+    transition: background-color linear 160ms;
+}
+
+.searchButton:hover {
+    color:white;
+    cursor: pointer;
+    background-color: #aa9696
+}
