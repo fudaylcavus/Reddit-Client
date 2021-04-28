@@ -1,25 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux'
-import Reddit from '../../app/Reddit'
 import { milisecondsToDate, shortenNumber, urlFix } from '../../app/util'
-import { selectIsLoading } from '../PostList/PostListSlice'
+import { loadComments, selectIsLoading } from '../PostList/PostListSlice'
 import './Post.css'
-import { addComment } from './PostSlice'
 
 const Post = (props) => {
     const dispatch = useDispatch();
     const { post } = props;
     const isLoading = useSelector(selectIsLoading)
+    
     const getComments = () => {
-        Reddit.getPostComments(post.permalink).then(comments => {
-            comments.forEach( comment => {
-                dispatch(addComment({
-                    author: comment.author,
-                    content: comment.body_html,
-                    created: comment.created,
-                    replies: comment.replies?.data?.children
-                }))
-            })
-        })
+        dispatch(loadComments({post}))
     }
         
     let styling = {
@@ -40,11 +30,10 @@ const Post = (props) => {
     }
 
     return (
-        
         <div className="post">
             <div className="vote-section">
                 <i className="fa fa-arrow-up"></i>
-                <p className={styling.empty || 0 }>{shortenNumber(post.ups)}</p>
+                <p className={styling.empty}>{shortenNumber(post.ups)}</p>
                 <i className="fa fa-arrow-down"></i>
             </div>
             <div className="content-section">

@@ -23,7 +23,7 @@ export const loadPosts = createAsyncThunk(
                     ups: item.ups,
                     author: item.author,
                     img: item.preview?.images[0]?.source?.url,
-                    created: item.created,
+                    created: item.created_utc,
                     permalink: item.permalink,
                     commentCount: item.num_comments,
                     comments: []
@@ -32,6 +32,24 @@ export const loadPosts = createAsyncThunk(
         })
         dispatch(removePosts)
         dispatch(addPosts(posts))
+    }
+)
+
+export const loadComments = createAsyncThunk(
+    'loadComments',
+    async ({post}, {dispatch}) => {
+        let comments = []
+        await Reddit.getPostComments(post.permalink).then(data => {
+            data.forEach( comment => {
+                comments.push({
+                    author: comment.author,
+                    content: comment.body_html,
+                    created: comment.created,
+                    replies: comment.replies?.data?.children
+                })
+            })
+        })
+        dispatch(setCommandsWithPostId({id: post.id, comments}))
     }
 )
 
@@ -50,6 +68,13 @@ const options = {
         },
         changeActiveReddit: (state, action) => {
             state.activeReddit = action.payload
+        },
+        setCommandsWithPostId: (state, action) => {
+            state.posts.forEach( post => {
+                if (post.id === action.payload.id) {
+                    post.comments = action.payload.comments
+                }
+            })
         }
     },
     extraReducers: {
@@ -70,7 +95,13 @@ const options = {
 
 const postlist = createSlice(options)
 export const selectIsLoading = state => state.postList.isLoading
+export const selectHasError = state => state.postList.hasError
 export const selectActiveReddit = state => state.postList.activeReddit
 export const selectPosts = state => state.postList.posts
 export default postlist.reducer;
-export const { addPost, addPosts, removePosts, changeActiveReddit } = postlist.actions;
+export const { 
+    addPost, 
+    addPosts, 
+    removePosts, 
+    changeActiveReddit,
+    setCommandsWithPostId } = postlist.actions;

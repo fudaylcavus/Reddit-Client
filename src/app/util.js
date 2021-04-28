@@ -15,7 +15,5 @@ export const shortenNumber = (ups) => {
 }
 
 export const milisecondsToDate = ms => {
-    let dt = new Date()
-    dt.setMilliseconds(ms);
-    return format(dt, 'en_US')
+    return format(ms * 1000, 'en_US')
 }

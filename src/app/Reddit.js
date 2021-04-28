@@ -17,6 +17,7 @@ const Reddit = {
     getPostComments: async (permalink) => {
         const response = await fetch(`${URL}${permalink}.json`);
         const json = await response.json();
+        console.log(json)
 
         return json[1].data.children.map((subreddit) => subreddit.data);
     }

@@ -1,18 +1,16 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { changeActiveReddit } from '../PostList/PostListSlice'
 import './SearchBar.css'
-import { changeText, selectText } from './SearchBarSlice'
 
 const SearchBar = () => {
 
-    const text = useSelector(selectText);
     const dispatch = useDispatch()
 
     const handleSubmit = (e) => {
         e.preventDefault()
         let text = document.getElementById("search").value;
-        // dispatch(changeText(text))
+        document.documentElement.scrollTop = 0;
         dispatch(changeActiveReddit(text));
     }
 

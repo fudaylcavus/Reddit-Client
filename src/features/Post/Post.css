@@ -8,7 +8,6 @@
     flex-direction: row;
     margin: 50px 15px;
     height: fit-content;
-    max-height: 90vh;
     background-color: white;
     overflow: hidden;
 }
@@ -36,7 +35,8 @@
     flex: 1 1 400px;
     align-items: center;
     flex-direction: column;
-    width: 95%;
+    width: 100%;
+    height: fit-content;
 }
 .info {
     width: 100%;
@@ -46,6 +46,7 @@
 }
 
 .content {
+    display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
