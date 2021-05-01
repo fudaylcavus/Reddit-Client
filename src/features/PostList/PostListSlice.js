@@ -80,6 +80,7 @@ const options = {
     },
     extraReducers: {
         [loadPosts.fulfilled]: (state) => {
+            document.documentElement.scrollTop = 0;
             state.isLoading = false;
             state.hasError = false;
         },

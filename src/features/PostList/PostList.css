@@ -1,5 +1,16 @@
 .post-area {
     grid-area: middle;
+    text-align: center;
+}
+
+.error {
+    padding: 3em;
+    margin: 20% 5% 0 5%;
+    background-color: white;
+    border-radius: 3.35em;
+    color: red;
+    font-weight: 800;
+    font-size: 1.7em;
 }
 
 @media screen and (max-width: 1200px) {

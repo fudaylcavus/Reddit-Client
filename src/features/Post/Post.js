@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { milisecondsToDate, shortenNumber, urlFix } from '../../app/util'
 import { changeActiveReddit, loadComments, selectIsLoading } from '../PostList/PostListSlice'
 import './Post.css'
@@ -14,7 +15,6 @@ const Post = (props) => {
     }
 
     const handleSubredditChange = () => {
-        document.documentElement.scrollTop = 0;
         dispatch(changeActiveReddit(post.subredditName))
     }
 
@@ -45,7 +45,7 @@ const Post = (props) => {
             </div>
             <div className="content-section">
                 <div className={styling.info}>
-                    <p><span onClick={handleSubredditChange} class="subreddit">{post.subredditName}</span> {`Posted by ${post.author || ""} ${milisecondsToDate(post.created)}`}</p>
+                    <p><span onClick={handleSubredditChange} className="subreddit"><Link to={`../${post.subredditName}` || ""}>{post.subredditName}</Link></span> {`Posted by ${post.author || ""} ${milisecondsToDate(post.created)}`}</p>
                 </div>
                 <div className="content">
                     <h2 className={styling.title}>{post.title || "hello man, nice to see you here."}</h2>
@@ -56,7 +56,7 @@ const Post = (props) => {
                 <div className="content-footer">
                         
                         <button className={styling.empty} onClick={getComments}>
-                            <i class="fas fa-comment-alt"></i>
+                            <i className="fas fa-comment-alt"></i>
                             {isLoading ? "" :
                                 shortenNumber(post.commentCount)
                             } Comments

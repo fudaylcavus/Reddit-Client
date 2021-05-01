@@ -1,16 +1,17 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { useRouteMatch } from 'react-router'
 import { changeActiveReddit } from '../PostList/PostListSlice'
 import './SearchBar.css'
 
-const SearchBar = () => {
-
+const SearchBar = (props) => {
+    console.log(props)
+    console.log(useRouteMatch())
     const dispatch = useDispatch()
 
     const handleSubmit = (e) => {
         e.preventDefault()
         let text = document.getElementById("search").value;
-        document.documentElement.scrollTop = 0;
         dispatch(changeActiveReddit(text));
     }
 
