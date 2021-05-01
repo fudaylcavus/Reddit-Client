@@ -39,11 +39,15 @@
     height: fit-content;
 }
 .info {
+    display: flex;
+    flex-wrap: wrap;
     width: 100%;
     height: fit-content;
     margin-top: 10px;
     margin-bottom: 15px;
     color: rgb(110, 110, 110);
+    line-height: calc(1em + 10px);
+    align-items: center;
 }
 
 .loading .subreddit {
@@ -54,6 +58,8 @@
     padding: 2px 10px;
     background-color: antiquewhite;
     border-radius: .5em;
+    word-wrap: break-word;
+    margin-right: 1em;
 }
 
 .subreddit:hover {
