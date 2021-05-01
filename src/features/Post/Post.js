@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { milisecondsToDate, shortenNumber, urlFix } from '../../app/util'
-import { loadComments, selectIsLoading } from '../PostList/PostListSlice'
+import { changeActiveReddit, loadComments, selectIsLoading } from '../PostList/PostListSlice'
 import './Post.css'
 
 const Post = (props) => {
@@ -8,9 +8,16 @@ const Post = (props) => {
     const { post } = props;
     const isLoading = useSelector(selectIsLoading)
     
+
     const getComments = () => {
         dispatch(loadComments({post}))
     }
+
+    const handleSubredditChange = () => {
+        document.documentElement.scrollTop = 0;
+        dispatch(changeActiveReddit(post.subredditName))
+    }
+
         
     let styling = {
         post: "post",
@@ -38,7 +45,7 @@ const Post = (props) => {
             </div>
             <div className="content-section">
                 <div className={styling.info}>
-                    <p>{`Posted by ${post.author || ""} ${milisecondsToDate(post.created)}`}</p>
+                    <p><span onClick={handleSubredditChange} class="subreddit">{post.subredditName}</span> {`Posted by ${post.author || ""} ${milisecondsToDate(post.created)}`}</p>
                 </div>
                 <div className="content">
                     <h2 className={styling.title}>{post.title || "hello man, nice to see you here."}</h2>
@@ -47,12 +54,12 @@ const Post = (props) => {
                         : ""}
                 </div>
                 <div className="content-footer">
-                    
+                        
                         <button className={styling.empty} onClick={getComments}>
-                            <i class="fa fa-comments"></i>
+                            <i class="fas fa-comment-alt"></i>
                             {isLoading ? "" :
                                 shortenNumber(post.commentCount)
-                            }
+                            } Comments
                         </button>  
                     
                 </div>

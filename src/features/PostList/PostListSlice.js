@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Reddit from "../../app/Reddit";
 
 const initialState = {
-    //initial loading posts
+    //for loading posts effect
     posts: [{},{},{}, {},{},{}],
     activeReddit: "r/popular",
     isLoading: false,
@@ -22,6 +22,7 @@ export const loadPosts = createAsyncThunk(
                     id: item.id,
                     ups: item.ups,
                     author: item.author,
+                    subredditName: item.subreddit_name_prefixed,
                     img: item.preview?.images[0]?.source?.url,
                     created: item.created_utc,
                     permalink: item.permalink,

@@ -2,7 +2,7 @@
     grid-area: middle;
 }
 
-@media screen and (max-width: 1468px) {
+@media screen and (max-width: 1200px) {
     .post-area {
         grid-column-start: left;
         grid-column-end: right;
