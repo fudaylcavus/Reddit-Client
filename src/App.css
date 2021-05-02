@@ -1,4 +1,4 @@
-.root-body {
+.App {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 70px auto;
@@ -29,4 +29,14 @@ nav img {
     display: inline-block;
     width: auto;
     height: 50px;
+}
+
+#hamburger {
+    display: none;
+}
+
+@media screen and (max-width: 1200px) {
+    #hamburger {
+        display: block;
+    }
 }

@@ -5,8 +5,8 @@ const initialState = {
     //for loading posts effect
     posts: [{},{},{}, {},{},{}],
     activeReddit: "r/popular",
-    isLoading: false,
-    hasError: false
+    isLoadingPosts: false,
+    hasErrorPosts: false
 }
 
 export const loadPosts = createAsyncThunk(
@@ -27,30 +27,11 @@ export const loadPosts = createAsyncThunk(
                     created: item.created_utc,
                     permalink: item.permalink,
                     commentCount: item.num_comments,
-                    comments: []
                 })
             })
         })
         dispatch(removePosts)
-        dispatch(addPosts(posts))
-    }
-)
-
-export const loadComments = createAsyncThunk(
-    'loadComments',
-    async ({post}, {dispatch}) => {
-        let comments = []
-        await Reddit.getPostComments(post.permalink).then(data => {
-            data.forEach( comment => {
-                comments.push({
-                    author: comment.author,
-                    content: comment.body_html,
-                    created: comment.created,
-                    replies: comment.replies?.data?.children
-                })
-            })
-        })
-        dispatch(setCommandsWithPostId({id: post.id, comments}))
+        return posts;
     }
 )
 
@@ -69,35 +50,29 @@ const options = {
         },
         changeActiveReddit: (state, action) => {
             state.activeReddit = action.payload
-        },
-        setCommandsWithPostId: (state, action) => {
-            state.posts.forEach( post => {
-                if (post.id === action.payload.id) {
-                    post.comments = action.payload.comments
-                }
-            })
         }
     },
     extraReducers: {
-        [loadPosts.fulfilled]: (state) => {
+        [loadPosts.fulfilled]: (state, action) => {
             document.documentElement.scrollTop = 0;
-            state.isLoading = false;
-            state.hasError = false;
+            state.isLoadingPosts = false;
+            state.hasErrorPosts = false;
+            state.posts = action.payload
         },
         [loadPosts.rejected]: (state) => {
-            state.isLoading = false;
-            state.hasError = true;
+            state.isLoadingPosts = false;
+            state.hasErrorPosts = true;
         },
         [loadPosts.pending]: (state) => {
-            state.isLoading = true;
-            state.hasError = false;
+            state.isLoadingPosts = true;
+            state.hasErrorPosts = false;
         }
     }
 }
 
 const postlist = createSlice(options)
-export const selectIsLoading = state => state.postList.isLoading
-export const selectHasError = state => state.postList.hasError
+export const selectIsLoading = state => state.postList.isLoadingPosts
+export const selectHasError = state => state.postList.hasErrorPosts
 export const selectActiveReddit = state => state.postList.activeReddit
 export const selectPosts = state => state.postList.posts
 export default postlist.reducer;
@@ -105,5 +80,4 @@ export const {
     addPost, 
     addPosts, 
     removePosts, 
-    changeActiveReddit,
-    setCommandsWithPostId } = postlist.actions;
+    changeActiveReddit } = postlist.actions;

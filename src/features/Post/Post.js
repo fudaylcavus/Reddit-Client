@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { secondsToDate, shortenNumber, urlFix } from '../../app/util'
-import { changeActiveReddit, loadComments, selectIsLoading } from '../PostList/PostListSlice'
+import { changeActiveReddit, selectIsLoading } from '../PostList/PostListSlice'
 import './Post.css'
 
 const Post = (props) => {
@@ -11,7 +11,7 @@ const Post = (props) => {
 
 
     const getComments = () => {
-        dispatch(loadComments({ post }))
+        // dispatch(loadComments({ post }))
     }
 
     const handleSubredditChange = () => {

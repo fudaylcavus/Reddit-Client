@@ -25,10 +25,12 @@
     padding: 5px;
     margin: 10px 0;
 }
+
 .vote-section i:hover {
     background-color: white;
     cursor: pointer;
 }
+
 .content-section {
     display: flex;
     margin: 10px 20px;
@@ -76,16 +78,17 @@
 .content {
     display: flex;
     flex-direction: column;
+    text-align: left;
     align-items: center;
-    text-align: center;
     width: 95%;
     max-height: 80%;
 }
 .title {
-    font-weight: bold;
+    font-weight: 500;
     font-size: 1.25em;
     margin-bottom: 20px;
     min-width: 50%;
+    justify-self: left;
 
 }
 .content img {

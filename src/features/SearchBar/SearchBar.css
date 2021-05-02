@@ -8,27 +8,28 @@
     outline:none;
     border: none;
     height: 35px;
-    width: 70%;
-    border-radius: 17.5px;
-    margin-right: 5px;
+    width: 55%;
+    border-radius: 17.5px 0 0 17.5px;
     outline: none;
     padding-left: 20px;
-    background-color: #e0c4c4;
+    background-color:whitesmoke;
     color:white;
 }
 
 .searchBox::placeholder {
-    color: white;
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .searchButton {
+    position: relative;
     border: none;
     font-size: 20px;
     outline: none;
-    height: 35px;
-    width: 35px;
-    border-radius: 50%;
-    background-color: white;
+    height: 37px;
+    width: 45px;
+    border-radius: 17.5px 17.5px 17.5px 17.5px;
+    right: 17.5px;
+    background-color: whitesmoke;
     color:#aa9696;
     transition: background-color linear 160ms;
 }
