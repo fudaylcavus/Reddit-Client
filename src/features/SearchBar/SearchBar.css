@@ -11,13 +11,14 @@
     width: 55%;
     border-radius: 17.5px 0 0 17.5px;
     outline: none;
-    padding-left: 20px;
+    padding-left: 15px;
     background-color:whitesmoke;
-    color:white;
+    color:black;
 }
 
 .searchBox::placeholder {
     color: rgba(0, 0, 0, 0.5);
+    position: relative;
 }
 
 .searchButton {
@@ -27,7 +28,7 @@
     outline: none;
     height: 37px;
     width: 45px;
-    border-radius: 17.5px 17.5px 17.5px 17.5px;
+    border-radius: 17.5px;
     right: 17.5px;
     background-color: whitesmoke;
     color:#aa9696;

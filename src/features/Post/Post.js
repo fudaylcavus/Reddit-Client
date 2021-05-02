@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { secondsToDate, shortenNumber, urlFix } from '../../app/util'
-import { changeActiveReddit, selectIsLoading } from '../PostList/PostListSlice'
+import { changeActiveReddit, selectIsLoadingPosts } from '../PostList/PostListSlice'
 import './Post.css'
 
 const Post = (props) => {
     const dispatch = useDispatch();
     const { post } = props;
-    const isLoading = useSelector(selectIsLoading)
+    const isLoading = useSelector(selectIsLoadingPosts)
 
 
     const getComments = () => {

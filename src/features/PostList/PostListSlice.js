@@ -71,8 +71,8 @@ const options = {
 }
 
 const postlist = createSlice(options)
-export const selectIsLoading = state => state.postList.isLoadingPosts
-export const selectHasError = state => state.postList.hasErrorPosts
+export const selectIsLoadingPosts = state => state.postList.isLoadingPosts
+export const selectHasErrorPosts = state => state.postList.hasErrorPosts
 export const selectActiveReddit = state => state.postList.activeReddit
 export const selectPosts = state => state.postList.posts
 export default postlist.reducer;

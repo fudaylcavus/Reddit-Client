@@ -41,6 +41,11 @@
     margin-right: 15px
 }
 
+.selected-subreddit {
+    background-color: antiquewhite;
+    border-radius: 25px 0 0 25px;
+}
+
 
 @media screen and (max-width: 1200px) {
     .subreddit-list {

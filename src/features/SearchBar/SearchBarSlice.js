@@ -18,7 +18,6 @@ const options = {
 
  export default searchBar.reducer;
  export const { changeText } = searchBar.actions;
-
  export const selectText = state => state.searchBar.text;
 
  

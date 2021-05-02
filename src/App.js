@@ -12,8 +12,7 @@ function App() {
     <Router>
       <main className="App">
         <nav>
-          <Link to="/">
-            {/* <img src="https://marka-logo.com/wp-content/uploads/2020/11/Reddit-Logo.png" alt="reddit"/> */}
+          <Link onClick={() => window.scrollTo(0,0)} to="/">
             <h2 style={{fontWeight: 600, fontSize: "1.5em"}}>Reddit <span style={{fontWeight: 400}}>Client</span>  </h2>
           </Link>
           <SearchBar/>

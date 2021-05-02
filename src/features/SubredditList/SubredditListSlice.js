@@ -55,3 +55,5 @@ const subredditList = createSlice(options)
 export default subredditList.reducer
 export const { setSubreddits } = subredditList.actions
 export const selectSubreddits = state => state.subredditList.subreddits
+export const isLoadingSubreddits = state => state.subredditList.isLoadingSubreddits
+export const hasErrorSubreddits = state => state.subredditList.hasErrorSubreddits
