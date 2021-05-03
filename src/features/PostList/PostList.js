@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
 import Post from "../Post/Post";
@@ -14,6 +14,7 @@ const PostList = () => {
     const inputText = useSelector(selectText)
     const isLoading = useSelector(selectIsLoadingPosts)
     let { subreddit } = useParams();
+    let activeRedditRef = useRef(activeReddit)
 
     if (subreddit) {
         dispatch(changeActiveReddit(`r/${subreddit}`))
@@ -22,7 +23,11 @@ const PostList = () => {
     }
 
     useEffect(() => {
-        dispatch(loadPosts({ activeReddit }));
+        if (activeRedditRef.current !== activeReddit) {
+            dispatch(loadPosts({ activeReddit }));
+            activeRedditRef = activeReddit
+        }
+        
 
     }, [dispatch, activeReddit])
 
