@@ -1,18 +1,30 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { secondsToDate, shortenNumber, urlFix } from '../../app/util'
-import { changeActiveReddit, selectIsLoadingPosts } from '../PostList/PostListSlice'
+import { changeActiveReddit, selectIsLoadingPosts, selectPosts } from '../PostList/PostListSlice'
+import { loadComments, setPostById } from './PostSlice'
 import './Post.css'
+import { useEffect } from 'react'
 
 const Post = (props) => {
     const dispatch = useDispatch();
     const { post } = props;
+    const posts = useSelector(selectPosts);
     const isLoading = useSelector(selectIsLoadingPosts)
+    const { postId } = useParams();
 
+    
 
-    const getComments = () => {
-        // dispatch(loadComments({ post }))
+    const handlePostPage = () => {
+        dispatch(setPostById({posts, postId}))
+        dispatch(loadComments(post.permalink))
     }
+
+    useEffect(() => {
+        if (postId) {
+            handlePostPage();
+        }
+    }, [postId])
 
     const handleSubredditChange = () => {
         dispatch(changeActiveReddit(post.subredditName))
@@ -59,14 +71,14 @@ const Post = (props) => {
                         : ""}
                 </div>
                 <div className="content-footer">
-
-                    <button className={styling.empty} onClick={getComments}>
-                        <i className="fas fa-comment-alt"></i>
-                        {isLoading ? "" :
-                            shortenNumber(post.commentCount)
-                        } Comments
+                    <Link to={postId ? "#" : `../post/${post.id}`}>
+                        <button className={styling.empty}>
+                            <i className="fas fa-comment-alt"></i>
+                            {isLoading ? "" :
+                                shortenNumber(post.commentCount)
+                            } Comments
                         </button>
-
+                    </Link>
                 </div>
             </div>
         </div>

@@ -2,16 +2,16 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import Reddit from "../../app/Reddit"
 
 const initialState = {
-    id: 0,
-    permalink: "",
-    comments: []
-}
+    comments: [],
+    isLoadingComments: false,
+    hasErrorComments: false
+};
 
 export const loadComments = createAsyncThunk(
     'loadComments',
-    async ({post}, {dispatch}) => {
+    async (permalink) => {
         let comments = []
-        await Reddit.getPostComments(post.permalink).then(data => {
+        await Reddit.getPostComments(permalink).then(data => {
             data.forEach( comment => {
                 comments.push({
                     author: comment.author,
@@ -21,7 +21,7 @@ export const loadComments = createAsyncThunk(
                 })
             })
         })
-        dispatch(setCommands({id: post.id, comments}))
+        return comments;
     }
 )
 
@@ -30,16 +30,31 @@ const options = {
     name: 'post',
     initialState,
     reducers: {
-        addComment: (state, action) => {
-            state.comments.push(action.payload)
+        setPostById: (state, action) => {           
+            const post = action.payload.posts.find( post => {
+                return post.id === action.payload.postId;
+            })
+            Object.assign(state, post);
+        }
+    },
+    extraReducers: {
+        [loadComments.pending]: (state) => {
+            state.isLoadingComments = true;
+            state.hasErrorComments = false;
         },
-        setCommands: (state, action) => {
+        [loadComments.rejected]: state => {
+            state.isLoadingComments = false;
+            state.hasErrorComments = true;
+        },
+        [loadComments.fulfilled]: (state, action) => {
+            state.isLoadingComments = false;
+            state.hasErrorComments = false;
             state.comments = action.payload;
         }
     }
 }
 
 const post = createSlice(options);
-export const { addComment, setCommands } = post.actions;
-export const selectComments = state => state.post.comments;
+export const { setPostById } = post.actions;
+export const selectPost = state => state.post;
 export default post.reducer;
