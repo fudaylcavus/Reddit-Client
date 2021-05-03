@@ -1,0 +1,29 @@
+.post-comments {
+    margin: -20px 15px 0 15px;
+    padding: 5px 0;
+    background-color: whitesmoke;
+}
+
+.post-comment {
+    display: block;
+    text-align: left;
+    background-color: white;
+    margin: 15px 0 15px 50px;
+    padding: 5px 10px
+}
+
+.author {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.comment-content {
+    font-size: 1em;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+
+.reply {
+    margin-left: 20px;
+}

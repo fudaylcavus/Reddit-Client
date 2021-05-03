@@ -9,6 +9,8 @@
     overflow-y: scroll;
 }
 
+
+
 .subreddit-list .header {
     text-align: center;
     background-color: whitesmoke;    
@@ -49,12 +51,15 @@
 
 @media screen and (max-width: 1200px) {
     .subreddit-list {
-        /* display: none; */
+        visibility: hidden;
         grid-column-start: left;
         grid-column-end: right;
         top: 70px;
         height: calc(100vh - 70px);
         margin: 0;
+    }
+    .subreddit-list.responsive {
+        visibility: visible;
     }
     
 }

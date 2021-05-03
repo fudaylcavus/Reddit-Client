@@ -8,6 +8,20 @@ const initialState = {
     hasErrorSubreddits: false
 }
 
+export const toggleDisplay = () => {
+    let subredditDiv = document.getElementById("sublist")
+    let burgerMenu = document.getElementById("hamburger")
+  
+    if (subredditDiv.className == "subreddit-list") {
+        subredditDiv.className += " responsive"
+        burgerMenu.classList.add("is-active")
+
+    } else {
+        subredditDiv.className = "subreddit-list"
+        burgerMenu.classList.remove("is-active")
+    }
+}
+
 export const loadSubreddits = createAsyncThunk(
     'sublistLoad',
     async () => {

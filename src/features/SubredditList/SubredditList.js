@@ -16,7 +16,7 @@ const SubredditList = () => {
   }, [dispatch]);
 
   return (
-    <div className="subreddit-list">
+    <div id="sublist" className="subreddit-list">
       <div className="header">
         <h2 className="title">Subreddit List</h2>
       </div>

@@ -2,7 +2,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import Reddit from "../../app/Reddit"
 
 const initialState = {
-    comments: [],
+    comments: [
+        {author: "fudaylcavus", body: "You can add me friend on github", id:1},
+        {author: "Fudayl Cavus", body: "You can add me friend on linkedin", id:2},
+        {author: "fudaylcavus", body: "You can add me friend on instagram", id:3},
+        {author: "Fudayl Cavus#5338", body: "You can add me friend on discord", id:4}],
     isLoadingComments: false,
     hasErrorComments: false
 };
@@ -15,9 +19,10 @@ export const loadComments = createAsyncThunk(
             data.forEach( comment => {
                 comments.push({
                     author: comment.author,
-                    content: comment.body,
+                    body: comment.body,
                     created: comment.created,
-                    replies: comment.replies?.data?.children
+                    replies: comment.replies?.data?.children,
+                    id: comment.id
                 })
             })
         })

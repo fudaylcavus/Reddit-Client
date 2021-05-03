@@ -5,6 +5,7 @@ import { changeActiveReddit, selectIsLoadingPosts, selectPosts } from '../PostLi
 import { loadComments, setPostById } from './PostSlice'
 import './Post.css'
 import { useEffect } from 'react'
+import Comments from './Comments/Comments'
 
 const Post = (props) => {
     const dispatch = useDispatch();
@@ -17,6 +18,9 @@ const Post = (props) => {
 
     const handlePostPage = () => {
         dispatch(setPostById({posts, postId}))
+    }
+
+    const handleComments = () => {
         dispatch(loadComments(post.permalink))
     }
 
@@ -49,38 +53,41 @@ const Post = (props) => {
     }
 
     return (
-        <div className="post">
-            <div className="vote-section">
-                <i className="fa fa-arrow-up"></i>
-                <p className={styling.empty}>{shortenNumber(post.ups)}</p>
-                <i className="fa fa-arrow-down"></i>
-            </div>
-            <div className="content-section">
-                <div className={styling.info}>
-                    <p onClick={handleSubredditChange} className="subreddit">
-                        <Link to={`../${post.subredditName}` || "#"}>
-                            {post.subredditName}
+        <div>
+            <div className="post">
+                <div className="vote-section">
+                    <i className="fa fa-arrow-up"></i>
+                    <p className={styling.empty}>{shortenNumber(post.ups)}</p>
+                    <i className="fa fa-arrow-down"></i>
+                </div>
+                <div className="content-section">
+                    <div className={styling.info}>
+                        <p onClick={handleSubredditChange} className="subreddit">
+                            <Link to={`../${post.subredditName}` || "#"}>
+                                {post.subredditName}
+                            </Link>
+                        </p>
+                        <p>{`Posted by ${post.author || "Fudayl Cavus"} ${secondsToDate(post.created)}`}</p>
+                    </div>
+                    <div className="content">
+                        <h2 className={styling.title}>{post.title || "Hello, nice to see you here. Probably you wanted to access a post directly. But this is not possible, please go back to homepage."}</h2>
+                        {post.img ?
+                            (isLoading ? "" : <img src={urlFix(post.img)} onError={(e) => e.target.display = 'none'} alt="post" />)
+                            : ""}
+                    </div>
+                    <div className="content-footer">
+                        <Link to={postId ? "#" : `../post/${post.id}`}>
+                            <button onClick={handleComments} className={styling.empty}>
+                                <i className="fas fa-comment-alt"></i>
+                                {isLoading ? "" :
+                                    shortenNumber(post.commentCount)
+                                } Comments
+                            </button>
                         </Link>
-                    </p>
-                    <p>{`Posted by ${post.author || ""} ${secondsToDate(post.created)}`}</p>
-                </div>
-                <div className="content">
-                    <h2 className={styling.title}>{post.title || "hello man, nice to see you here."}</h2>
-                    {post.img ?
-                        (isLoading ? "" : <img src={urlFix(post.img)} onError={(e) => e.target.display = 'none'} alt="post" />)
-                        : ""}
-                </div>
-                <div className="content-footer">
-                    <Link to={postId ? "#" : `../post/${post.id}`}>
-                        <button className={styling.empty}>
-                            <i className="fas fa-comment-alt"></i>
-                            {isLoading ? "" :
-                                shortenNumber(post.commentCount)
-                            } Comments
-                        </button>
-                    </Link>
+                    </div>
                 </div>
             </div>
+            {postId ? <Comments comments={post.comments} /> : ""}
         </div>
     )
 

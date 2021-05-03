@@ -18,17 +18,10 @@ const PostList = () => {
 
     if (subreddit) {
         dispatch(changeActiveReddit(`r/${subreddit}`))
-    } else {
-        dispatch(changeActiveReddit("r/popular"))
     }
 
     useEffect(() => {
-        if (activeRedditRef.current !== activeReddit) {
-            dispatch(loadPosts({ activeReddit }));
-            activeRedditRef = activeReddit
-        }
-        
-
+        dispatch(loadPosts({ activeReddit }));
     }, [dispatch, activeReddit])
 
     return (
