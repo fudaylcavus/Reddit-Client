@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Reddit from "../../app/Reddit";
+import { toggleDisplay as sublistDisplay } from "../SubredditList/SubredditListSlice";
 
 const initialState = {
     //for loading posts effect
@@ -27,6 +28,8 @@ export const loadPosts = createAsyncThunk(
                     created: item.created_utc,
                     permalink: item.permalink,
                     commentCount: item.num_comments,
+                    selftext: item.selftext,
+                    video: item?.secure_media?.reddit_video?.fallback_url,
                 })
             })
         })
@@ -54,7 +57,7 @@ const options = {
     },
     extraReducers: {
         [loadPosts.fulfilled]: (state, action) => {
-            document.documentElement.scrollTop = 0;
+            window.scrollTo(0,0);
             state.isLoadingPosts = false;
             state.hasErrorPosts = false;
             state.posts = action.payload
@@ -64,6 +67,7 @@ const options = {
             state.hasErrorPosts = true;
         },
         [loadPosts.pending]: (state) => {
+            sublistDisplay("off");
             state.isLoadingPosts = true;
             state.hasErrorPosts = false;
         }

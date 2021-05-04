@@ -28,9 +28,8 @@ const SubredditList = () => {
       )
       : subreddits.map((subreddit) => {
           return (
-            <Link to={`../${subreddit.display_name_prefixed}` || "#"}>
+            <Link key={subreddit.id} to={`../${subreddit.display_name_prefixed}` || "#"}>
               <div
-                key={subreddit.id}
                 className={`subreddit-item${
                   url === "/" + subreddit.display_name_prefixed
                     ? " selected-subreddit"

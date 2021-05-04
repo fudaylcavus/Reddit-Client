@@ -9,11 +9,14 @@ const Comment = ({comment}) => {
 
     const post = useSelector(selectPost)
     const { isLoadingComments } = post
-    //to handle both replies and spliced comments
+
+
+    //to handle both replies and pre-spliced comments
     //check if id in the first directory else get in to data.
     if (!comment.id) {
         comment = comment.data;
     }
+
 
     return (
         <div key={comment.id} className="post-comment">
@@ -32,11 +35,19 @@ const Comment = ({comment}) => {
                     if (index < 5 && reply.data.body) {
                         return (
                             <div className="reply">
-                                <Comment comment={reply} />
+                                <Comment key={reply.data.id} comment={reply} />
                             </div>
                         )
                     } else return ""
-                }) : ""
+                }) : comment?.replies?.data?.children.map((reply, index) => {
+                        if (index < 5 && reply.data.body) {
+                            return (
+                                <div className="reply">
+                                    <Comment key={reply.data.id} comment={reply} />
+                                </div>
+                            )
+                        } else return ""
+                    })
             }
             
         </div>
@@ -45,14 +56,21 @@ const Comment = ({comment}) => {
 }
 
 const Comments = ({comments}) => {
+    const post = useSelector(selectPost)
+    const { hasErrorComments } = post;
     return (
+        
         <div className="post-comments">
-            {comments.map( (comment, index) => {
+            {hasErrorComments 
+            ? <h2 className="error">ERROR</h2> 
+            : comments.map( (comment, index) => {
                 if (comment.body && index < 15) {
-                    return <Comment comment={comment} />
+                    return <Comment key={comment.id} comment={comment} />
                 } else return ""
                 
-            })}
+            })
+                
+            }
         </div>
     )
 }

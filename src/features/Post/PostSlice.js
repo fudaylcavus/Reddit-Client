@@ -52,6 +52,7 @@ const options = {
             state.hasErrorComments = true;
         },
         [loadComments.fulfilled]: (state, action) => {
+            window.scrollTo(0, 0);
             state.isLoadingComments = false;
             state.hasErrorComments = false;
             state.comments = action.payload;
