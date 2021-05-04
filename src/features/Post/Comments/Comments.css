@@ -26,19 +26,13 @@
 
 .reply {
     border-left: 2px solid lightgray;
-    margin: 15px 0 15px 10px;
+    margin: 15px 0 15px 5px;
 }
 
 .reply::after {
-    content: "⚬";
+    content: "";
     position: relative;
     top: 15px;
-    left: -4.5px;
-    /* border-left: 2px solid gray; */
-}
-
-.reply:hover, 
-.reply::after:hover {
-    display: none;
-    background-color: black;
+    left: -2px;
+    border-left: 2px solid lightgray;
 }

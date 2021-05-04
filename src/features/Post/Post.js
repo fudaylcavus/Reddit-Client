@@ -19,8 +19,9 @@ const Post = (props) => {
     }
 
     //Reddit video sources not include sound
-    const handleVideoPlay = () => {
+    const handleVideoPlay = ({target}) => {
         let audio = document.getElementById(post.id)
+        audio.currentTime = target.currentTime;
         audio.play()
     }
 
