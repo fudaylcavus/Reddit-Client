@@ -80,8 +80,6 @@ const Post = (props) => {
                     </div>
                     <div className="content">
                         <h2 className={styling.title}>{post.title || "Hello, nice to see you here. Probably you wanted to access a post directly. But this is not possible, please go back to homepage."}</h2>
-                        {post.selftext ?
-                            <p>{post.selftext}</p> : ""}
                         {post.img ?
                             (isLoading 
                                 ? "" 
