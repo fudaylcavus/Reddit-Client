@@ -12,7 +12,7 @@ export const toggleDisplay = () => {
     let subredditDiv = document.getElementById("sublist")
     let burgerMenu = document.getElementById("hamburger")
   
-    if (subredditDiv.className == "subreddit-list") {
+    if (subredditDiv.className === "subreddit-list") {
         subredditDiv.className += " responsive"
         burgerMenu.classList.add("is-active")
 

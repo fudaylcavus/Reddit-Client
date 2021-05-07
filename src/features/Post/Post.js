@@ -14,8 +14,6 @@ const Post = (props) => {
     const isLoading = useSelector(selectIsLoadingPosts)
     const { postId } = useParams();
 
-    
-
     const handlePostPage = () => {
         dispatch(setPostById({posts, postId}))
     }
@@ -33,7 +31,6 @@ const Post = (props) => {
     const handleSubredditChange = () => {
         dispatch(changeActiveReddit(post.subredditName))
     }
-
 
     let styling = {
         post: "post",
