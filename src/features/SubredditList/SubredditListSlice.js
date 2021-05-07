@@ -8,11 +8,13 @@ const initialState = {
     hasErrorSubreddits: false
 }
 
-export const toggleDisplay = () => {
+export const toggleDisplay = (option) => {
     let subredditDiv = document.getElementById("sublist")
     let burgerMenu = document.getElementById("hamburger")
   
-    if (subredditDiv.className === "subreddit-list") {
+    //Each list click going to execute function with `off` no matter what,
+    //It will try to re-hide the view.
+    if (subredditDiv.className === "subreddit-list" && option !== "off") {
         subredditDiv.className += " responsive"
         burgerMenu.classList.add("is-active")
 
