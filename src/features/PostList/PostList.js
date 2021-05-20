@@ -1,30 +1,16 @@
-import React, { useEffect } from "react";
-import { useParams } from 'react-router-dom'
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector} from "react-redux";
 import Post from "../Post/Post";
 import './PostList.css'
-import { changeActiveReddit, loadPosts, selectActiveReddit, selectHasErrorPosts, selectIsLoadingPosts, selectPosts } from "./PostListSlice";
+import {  selectHasErrorPosts, selectIsLoadingPosts, selectPosts } from "./PostListSlice";
 import { selectText } from "../SearchBar/SearchBarSlice";
 
 const PostList = () => {
-    const dispatch = useDispatch();
     let posts = useSelector(selectPosts);
-    let activeReddit = useSelector(selectActiveReddit);
     const hasError = useSelector(selectHasErrorPosts)
     const inputText = useSelector(selectText)
     const isLoading = useSelector(selectIsLoadingPosts)
-    let { subreddit } = useParams();
-
-    if (subreddit) {
-        dispatch(changeActiveReddit(`r/${subreddit}`))
-    } else {
-        dispatch(changeActiveReddit("r/popular"))
-    }
-
-    useEffect(() => {
-        dispatch(loadPosts({ activeReddit }));
-    }, [dispatch, activeReddit])
-
+    
     return (
         <div className="post-area">
             { hasError ? (

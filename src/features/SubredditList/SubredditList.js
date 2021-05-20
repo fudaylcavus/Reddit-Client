@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useRouteMatch } from "react-router-dom";
+import { changeActiveReddit } from "../PostList/PostListSlice";
 import "./SubredditList.css";
 import { hasErrorSubreddits, isLoadingSubreddits, loadSubreddits, selectSubreddits } from "./SubredditListSlice";
 
@@ -15,6 +16,10 @@ const SubredditList = () => {
     dispatch(loadSubreddits());
   }, [dispatch]);
 
+  const handleSubredditChange = (subreddit) => {
+    dispatch(changeActiveReddit(subreddit))
+  }
+
   return (
     <div id="sublist" className="subreddit-list">
       <div className="header">
@@ -28,7 +33,7 @@ const SubredditList = () => {
       )
       : subreddits.map((subreddit) => {
           return (
-            <Link key={subreddit.id} to={`../${subreddit.display_name_prefixed}` || "#"}>
+            <Link onClick={() => handleSubredditChange(subreddit.display_name_prefixed)} key={subreddit.id} to={`../${subreddit.display_name_prefixed}` || "#"}>
               <div
                 className={`subreddit-item${
                   url === "/" + subreddit.display_name_prefixed
