@@ -1,6 +1,6 @@
 ## Reddit Client
 
-> To try live version of it check this link out: https://fc-reddit-client.com
+> To try live version of it check this link out: https://fc-reddit-client.netlify.app/
 
 ### Info
 
